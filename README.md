@@ -1,2 +1,5 @@
-# vue-webpack-base
-vue-webpack起步项目
+# vue2-webpack5-base
+
+vue2-webpack5 起步项目
+
+## 配置

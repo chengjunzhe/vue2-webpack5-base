@@ -8,19 +8,23 @@
     <title>
         <%= htmlWebpackPlugin.options.title %>
     </title>
+
     <!-- 使用CDN的CSS文件 -->
     <% for (var i in htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.css) { %>
         <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="stylesheet" />
         <% } %>
+            <!-- 调用dll动态链接库 -->
+            <% if (htmlWebpackPlugin.options.dll){ %>
+                <script defer=defer src="/js/vendor.dll.js"></script>
+                <% } %>
+                    <!-- 使用CDN加速的JS文件-->
+                    <% for (var i in htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
+                        <script defer=defer src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+                        <% } %>
 </head>
 
 <body>
     <div id='app'></div>
-
-    <!-- 使用CDN加速的JS文件，配置在vue.config.js下 -->
-    <% for (var i in htmlWebpackPlugin.options.cdn&&htmlWebpackPlugin.options.cdn.js) { %>
-        <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
-        <% } %>
 </body>
 
 </html>
