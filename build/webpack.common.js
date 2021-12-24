@@ -1,12 +1,15 @@
 const path = require('path')
-const webpack = require('webpack')
+// const webpack = require('webpack')
 
 //HTML模板插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// 复制文件插件
-const CopyPlugin = require('copy-webpack-plugin')
+
+// // 复制文件插件
+// const CopyPlugin = require('copy-webpack-plugin')
+
 // css独立打包插件
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 //vue插件
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
@@ -55,9 +58,9 @@ const htmlWebpackOne = new HtmlWebpackPlugin({
   // 配置cdn
   cdn: IS_PROD ? cdn.build : cdn.dev,
   // 配置dll
-  dll: false,
-  // 哈希
-  hash: false,
+  dll: true,
+  // 配置hash
+  hash: true,
   // 压缩配置
   minify: {
     // 去除引号
@@ -66,10 +69,6 @@ const htmlWebpackOne = new HtmlWebpackPlugin({
 })
 
 module.exports = {
-  // 设置持久化缓存——webpack5特性——可不用Dll
-  cache: {
-    type: 'filesystem'
-  },
   // 设置入口
   entry: {
     app: resolve('../src/index.js')
@@ -154,11 +153,12 @@ module.exports = {
         }
       },
       {
-        test: /\.js$/i,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: [
+          // 开启多进程打包
           // {
-          //   loader: 'thread-loader', // 开启多进程打包
+          //   loader: 'thread-loader',
           //   options: {
           //     worker: 3
           //   }
@@ -179,6 +179,8 @@ module.exports = {
     vuePlugin,
     miniCssExtract,
     htmlWebpackOne
+
+    // dll--------------------------------------------------------
     // // 配置dll插件
     // new webpack.DllReferencePlugin({
     //   context: __dirname,
