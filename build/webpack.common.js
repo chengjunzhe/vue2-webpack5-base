@@ -58,13 +58,24 @@ const htmlWebpackOne = new HtmlWebpackPlugin({
   // 配置cdn
   cdn: IS_PROD ? cdn.build : cdn.dev,
   // 配置dll
-  dll: true,
+  dll: false,
   // 配置hash
-  hash: true,
+  hash: false,
   // 压缩配置
   minify: {
+    // 去除注释
+    removeComments: true,
     // 去除引号
-    removeAttributeQuotes: true
+    removeAttributeQuotes: true,
+    collapseWhitespace: true,
+    removeRedundantAttributes: true,
+    useShortDoctype: true,
+    removeEmptyAttributes: true,
+    removeStyleLinkTypeAttributes: true,
+    keepClosingSlash: true,
+    minifyJS: true,
+    minifyCSS: true,
+    minifyURLs: true
   }
 })
 
